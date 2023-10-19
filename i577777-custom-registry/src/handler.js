@@ -1,19 +1,26 @@
-const all = require("@sap-opps/odata-sdk");
+const odataSdk = require("@sap-opps/odata-sdk");
+const util = require("util");
+
+const messages = [];
 
 module.exports = {
   main: async function (event, context) {
-    const od = all.oData;
-    const odfn = od();
-    console.log("Lets go!");
-    const resultPromise = odfn.basePricesApi
-      .requestBuilder()
-      .getAll()
-      .top(5)
-      .execute({ destinationName: "PAULAN_ODATA_DEST" });
-    console.log("Still alive!");
-    resultPromise.then((data) => {
-      console.log(data);
-    });
-    return "done";
+    try {
+      const od = odataSdk.oData;
+      const odfn = od();
+      messages.push("Lets go! - GitHub version");
+      const resultPromise = await odfn.basePricesApi
+        .requestBuilder()
+        .getAll()
+        .top(5)
+        .execute({ destinationName: "PAULAN_ODATA_DEST" });
+      messages.push("Still alive!");
+      messages.push(resultPromise);
+      messages.push("done");
+    } catch (error) {
+      messages.push(error.message);
+    } finally {
+      return util.inspect(messages);
+    }
   },
 };
