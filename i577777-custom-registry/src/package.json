@@ -1,0 +1,15 @@
+{
+  "name": "npm-custom-registry",
+  "version": "1.0.0",
+  "description": "Example function to add custom npm registry",
+  "author": "i577777",
+  "scripts": {
+    "execute-script": "node handler.js"
+  },
+  "main": "OData/",
+  "license": "some license",
+  "dependencies": {
+    "@sap-cloud-sdk/odata-v2": "^3.5.0",
+    "@sap-opps/odata-sdk": "^1.0.4"
+  }
+}
